@@ -87,6 +87,43 @@ describe("Testes da Classe Conta", ()=>{
 
     })
 
+    test("criar uma chave pix por cpf com sucesso", ()=>{
+        //setup
+        const conta = new Conta();
+        //acao
+        const operacao = conta.criarChavePix("123.322.112-45", "CPF");
+        //verificao
+        expect(operacao).toBe("Chave Pix por cpf criada com sucesso");
+        expect(conta.chavesPix.cpf).toBe("123.322.112-45");
+    });
 
+    test("retornar mensagem de erro ao tentar cadastra chave pix com cpf invalido", ()=>{
+        //setup
+        const conta = new Conta();
+        //acao
+        const operacao = conta.criarChavePix("123345", "CPF");
+        //verificao
+        expect(operacao).toBe("Erro: CPF inválido");
+    });
+
+    test("criar uma chave pix por emaill com sucesso", ()=>{
+        //setup
+        const conta = new Conta();
+        //acao
+        const operacao = conta.criarChavePix("gabylopes@email.com", "EMAIL");
+        //verificao
+        expect(operacao).toBe("Chave Pix por email criada com sucesso");
+        expect(conta.chavesPix.email).toBe("gabylopes@email.com");
+    });
+
+    test("criar uma chave pix por telefone com sucesso", ()=>{
+        //setup
+        const conta = new Conta();
+        //acao
+        const operacao = conta.criarChavePix("84999991234", "TELEFONE");
+        //verificao
+        expect(operacao).toBe("Chave Pix por telefone criada com sucesso");
+        expect(conta.chavesPix.telefone).toBe("84999991234");
+    });
 
 })
